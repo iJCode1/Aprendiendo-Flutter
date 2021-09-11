@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_evaluacion_practica1/screens/widget/navigation_drawer_widget.dart';
 import 'package:flutter_evaluacion_practica1/services/auth_services.dart';
 import 'package:flutter_evaluacion_practica1/src/model/pastel.dart';
 import 'package:flutter_evaluacion_practica1/src/ui/information_pastel.dart';
@@ -42,6 +43,7 @@ void dispose(){
       debugShowCheckedModeBanner: false,
       title: 'Productos',
       home: Scaffold(
+        drawer: NavigationDrawerWidget(),
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
         backwardsCompatibility: false,
