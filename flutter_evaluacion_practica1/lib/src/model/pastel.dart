@@ -7,8 +7,8 @@ class Pastel{
   String? precio;
   String? fecha;
   String? contacto;
-  String? latitude;
-  String? longitude;
+  late double latitude;
+  late double longitude;
   late String foto;
 
   Pastel (this.id, this.articulo, this.descripcion, this.precio, this.fecha, this.contacto, this.latitude, this.longitude, this.foto);
@@ -30,8 +30,8 @@ class Pastel{
   String? get getPrecio => precio;
   String? get getFecha => fecha;
   String? get getContacto => contacto;
-  String? get getLatitude => latitude;
-  String? get getLongitude => longitude;
+  double? get getLatitude => latitude;
+  double? get getLongitude => longitude;
   String? get getFoto => foto;
 
   Pastel.fromSnapshot(DataSnapshot snapshot){

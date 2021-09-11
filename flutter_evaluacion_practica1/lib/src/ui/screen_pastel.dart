@@ -5,20 +5,67 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter_evaluacion_practica1/screens/map/map.dart';
 import 'package:flutter_evaluacion_practica1/screens/uploadButton/button_widget.dart';
 import 'package:flutter_evaluacion_practica1/services/firebase_api.dart';
 import 'package:flutter_evaluacion_practica1/src/model/pastel.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:location/location.dart';
 import 'package:path/path.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class ScreenPastel extends StatefulWidget{
+
+// ********************* Mapa 
+  late final Location location = Location();
+  late Future<LocationData> locData;
+  late final MapController controller = MapController();
+  //UTE Occidental
+  late double lat = 19.256175898897993;
+  late double lng = -99.57963267652704;
+  late double zoom = 17;
+// * Mapa **********************
+
   final Pastel pastel;
-  ScreenPastel(this.pastel);
+
+  ScreenPastel(this.pastel){
+    initLocation();
+    locData = getLocation();
+  }
 
   @override
   _ScreenPastelState createState() => _ScreenPastelState();
+
+
+  // ********************* Mapa 
+void initLocation() async {
+    late bool _serviceEnabled;
+    late PermissionStatus _permissionGranted;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return Future.error('Servicios de ubicación deshabilitados!');
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return Future.error('Permisos de ubicación no otorgados!');
+      }
+    }
+
+    await location.changeSettings(interval: 2000, distanceFilter: 2);
+  }
+
+  Future<LocationData> getLocation() {
+    return location.getLocation();
+  }
+// * Mapa **********************
 }
 
 final pastelRF = FirebaseDatabase.instance.reference().child('pastel');
@@ -31,8 +78,8 @@ class _ScreenPastelState extends State<ScreenPastel>{
   late TextEditingController precioController;
   late String fechaController = "";
   late TextEditingController contactoController;
-  late TextEditingController latitudeController;
-  late TextEditingController longitudeController;
+  late double latitudeController;
+  late double longitudeController;
   late String fotoController = "";
   DateTime?  _dateTime;
   final _formkey = GlobalKey<FormState>();
@@ -46,8 +93,8 @@ class _ScreenPastelState extends State<ScreenPastel>{
     precioController = new TextEditingController(text:widget.pastel.precio);
     fechaController = (widget.pastel.fecha)!;
     contactoController = new TextEditingController(text:widget.pastel.contacto);
-    latitudeController = new TextEditingController(text:widget.pastel.latitude);
-    longitudeController = new TextEditingController(text:widget.pastel.longitude);
+    latitudeController = (widget.pastel.latitude);
+    longitudeController = (widget.pastel.longitude);
     fotoController = (widget.pastel.foto);
     super.initState();
   }
@@ -196,7 +243,66 @@ class _ScreenPastelState extends State<ScreenPastel>{
                   //Mapa
                   Container(
                     //padding: EdgeInsets.only(left: 10, right: 10),
-                    child: MapaGoogle(),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 300,
+                          height: 300,
+                          child: Center(
+                            child: FlutterMap(
+                              mapController: widget.controller,
+                              options: MapOptions(
+                                // center: LatLng( widget.lat, widget.lng),
+                                center: latitudeController != 0 
+                                ? LatLng(latitudeController, longitudeController)
+                                : LatLng( widget.lat, widget.lng),
+                                zoom: widget.zoom,
+                              ),
+                              layers: [
+                                TileLayerOptions(
+                                    urlTemplate:
+                                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                                    subdomains: ['a', 'b', 'c']),
+                                MarkerLayerOptions(
+                                  markers: [
+                                    Marker(
+                                      point: latitudeController != 0 
+                                      ? LatLng(latitudeController, longitudeController)
+                                      : LatLng( widget.lat, widget.lng),
+                                      builder: (ctx) => Container(
+                                        child: Icon(Icons.pin_drop_rounded,
+                                            color: Colors.red, size: 34),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            widget.locData = widget.getLocation();
+
+                            widget.locData.then((value) {
+                              widget.lat = value.latitude!;
+                              widget.lng = value.longitude!;
+                              widget.controller
+                                  .move(LatLng(widget.lat, widget.lng), widget.zoom);
+                              print(widget.lat);
+                              latitudeController = value.latitude!;
+                              print(widget.lng);
+                              longitudeController = value.longitude!;
+                              setState(() {
+                                //Navigator.pop(context);
+                              });
+                            });
+
+                          },
+                          child: Text('Obtener Ubicación'),
+                        ),
+                      ],
+                    ),
                   ),
                   Padding(padding:EdgeInsets.only(top:8.0)),
                   Divider(),
@@ -205,13 +311,29 @@ class _ScreenPastelState extends State<ScreenPastel>{
                     padding: EdgeInsets.only(left: 10, right: 10),
                     child: TextFormField(
                       readOnly: true,
-                      controller: latitudeController,
                       style: TextStyle(
                         fontWeight:FontWeight.bold,
                         fontSize:18.0),
                       decoration: InputDecoration(
-                        icon: Icon(Icons.monetization_on, color: new Color.fromRGBO(48, 71, 94, 1)),
-                        labelText: 'Latitude'),
+                        icon: Icon(Icons.map_sharp, color: new Color.fromRGBO(48, 71, 94, 1)),
+                        labelText: latitudeController != 0 ? latitudeController.toString() : 'Latitude'),
+                        keyboardType: TextInputType.text,
+                      
+                    ),
+                  ),
+                  Padding(padding:EdgeInsets.only(top:8.0)),
+                  Divider(),
+                  //Longitude
+                  Container(
+                    padding: EdgeInsets.only(left: 10, right: 10),
+                    child: TextFormField(
+                      readOnly: true,
+                      style: TextStyle(
+                        fontWeight:FontWeight.bold,
+                        fontSize:18.0),
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.map_sharp, color: new Color.fromRGBO(48, 71, 94, 1)),
+                        labelText: latitudeController != 0 ? longitudeController.toString() : 'Longitude'),
                         keyboardType: TextInputType.text,
                       
                     ),
@@ -246,6 +368,8 @@ class _ScreenPastelState extends State<ScreenPastel>{
                             'fecha':fechaController,
                             'precio':precioController.text,
                             'contacto':contactoController.text,
+                            'latitude': latitudeController,
+                            'longitude': longitudeController,
                             'foto': fotoController,
                           }).then((_)=>{Navigator.pop(context)});
                         }else{
@@ -255,6 +379,8 @@ class _ScreenPastelState extends State<ScreenPastel>{
                             'fecha':fechaController,
                             'precio':precioController.text,
                             'contacto':contactoController.text,
+                            'latitude': latitudeController,
+                            'longitude': longitudeController,
                             'foto': fotoController,
                           }).then((_)=>{Navigator.pop(context)});
                         }
