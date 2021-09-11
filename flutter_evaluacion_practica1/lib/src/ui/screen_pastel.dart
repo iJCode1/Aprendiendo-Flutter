@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_evaluacion_practica1/screens/uploadButton/button_widget.dart';
 import 'package:flutter_evaluacion_practica1/services/firebase_api.dart';
-import 'package:flutter_evaluacion_practica1/services/photo_Upload.dart';
 import 'package:flutter_evaluacion_practica1/src/model/pastel.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:image_picker/image_picker.dart';

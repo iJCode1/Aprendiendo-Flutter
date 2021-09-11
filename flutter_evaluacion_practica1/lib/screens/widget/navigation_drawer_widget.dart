@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_evaluacion_practica1/screens/pages/favourites_page.dart';
+import 'package:flutter_evaluacion_practica1/screens/pages/creditos.dart';
 import 'package:flutter_evaluacion_practica1/screens/pages/people_page.dart';
 import 'package:flutter_evaluacion_practica1/screens/pages/user_page.dart';
 import 'package:flutter_evaluacion_practica1/src/model/pastel.dart';
@@ -82,7 +82,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   buildMenuItem(
-                    text: 'Creditos',
+                    text: 'Créditos',
                     icon: Icons.person,
                     onClicked: () => selectedItem(context, 6),
                   ),
@@ -184,9 +184,9 @@ class NavigationDrawerWidget extends StatelessWidget {
           builder: (context) => ScreenPastel(Pastel(null,'','','','','',0,0,''))),
         );
         break;
-      case 2:
+      case 6:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => FavouritesPage()),
+          builder: (context) => Creditos()),
         );
         break;
     }

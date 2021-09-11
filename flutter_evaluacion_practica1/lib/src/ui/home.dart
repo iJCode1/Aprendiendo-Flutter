@@ -89,7 +89,7 @@ class _HomeState extends State<Home> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 35),
                           child: Text(
-                            'Pastelerias',
+                            'Pastelerías',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 23,
