@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_evaluacion_practica1/screens/uploadButton/button_widget.dart';
 import 'package:flutter_evaluacion_practica1/services/firebase_api.dart';
+import 'package:flutter_evaluacion_practica1/services/photo_Upload.dart';
 import 'package:flutter_evaluacion_practica1/src/model/pastel.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:path/path.dart';
@@ -28,7 +30,6 @@ class ScreenPastel extends StatefulWidget{
 // * Mapa **********************
 
   final Pastel pastel;
-
   ScreenPastel(this.pastel){
     initLocation();
     locData = getLocation();
@@ -85,6 +86,9 @@ class _ScreenPastelState extends State<ScreenPastel>{
   final _formkey = GlobalKey<FormState>();
   UploadTask? task;
   File? file;
+
+  late File sampleImage;
+
 
   @override
   void initState(){
@@ -340,22 +344,24 @@ class _ScreenPastelState extends State<ScreenPastel>{
                   ),
                   Padding(padding:EdgeInsets.only(top:8.0)),
                   Divider(),
-                  //Foto
                   fotoController.length < 10 ? Container() : new Image.file(new File(fotoController)),
                   Padding(padding:EdgeInsets.only(top:8.0)),
                   Divider(),
-                  
                   ButtonWidget(
-                    text: 'Seleccionar Foto',
-                    icon: Icons.photo,
-                    onClicked: selectFile,
+                    text: 'Tomar Foto',
+                    icon: Icons.camera_alt,
+                    // onClicked: selectFile,
+                    onClicked: getImage,
                   ),
                   SizedBox(height: 20),
                   task != null ? buildUploadStatus(task!) : Container(),
                   SizedBox(height: 8),
-                  Text(
-                    fileName,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  Container(
+                    padding:EdgeInsets.only(left: 15, top:10, right: 15, bottom: 10),
+                    child: Text(
+                      fileName,
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
                   ),
                   Padding(padding:EdgeInsets.only(top:8.0)),
                   Divider(),
@@ -410,11 +416,26 @@ class _ScreenPastelState extends State<ScreenPastel>{
 
     if (result == null) return;
     final path = result.files.single.path;
-    print("Holaaaaa");
-    print(path);
+    print("Holaaaaaeeee");
+    print(path.toString());
     fotoController = path.toString();
 
     setState(() => file = File(path!));
+  }
+
+  Future getImage() async{
+    //var tempImage= await ImagePicker.platform.pickImage(source: ImageSource.gallery);
+
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+    print("Imagennnnnnnnn");
+    //final path = image.path.
+    //print(image!.path.toString());
+    fotoController = image!.path.toString();
+    // setState((){
+    //   sampleImage= new File(image.path);
+    // });
+    setState(() => file = File(image.path));
   }
 
   Future uploadFile() async {
