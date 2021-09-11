@@ -27,10 +27,12 @@ class _ScreenPastelState extends State<ScreenPastel>{
   late List<Pastel> items;
 
   late TextEditingController articuloController;
-  late TextEditingController ingredientesController;
-  late TextEditingController creadorController;
-  late TextEditingController fechaController;
+  late TextEditingController descripcionController;
   late TextEditingController precioController;
+  late String fechaController = "";
+  late TextEditingController contactoController;
+  late TextEditingController latitudeController;
+  late TextEditingController longitudeController;
   late String fotoController = "";
   DateTime?  _dateTime;
   final _formkey = GlobalKey<FormState>();
@@ -40,10 +42,12 @@ class _ScreenPastelState extends State<ScreenPastel>{
   @override
   void initState(){
     articuloController = new TextEditingController(text:widget.pastel.articulo);
-    ingredientesController = new TextEditingController(text:widget.pastel.ingredientes);
-    creadorController = new TextEditingController(text:widget.pastel.creador);
-    fechaController = new TextEditingController(text:widget.pastel.fecha);
+    descripcionController = new TextEditingController(text:widget.pastel.descripcion);
     precioController = new TextEditingController(text:widget.pastel.precio);
+    fechaController = (widget.pastel.fecha)!;
+    contactoController = new TextEditingController(text:widget.pastel.contacto);
+    latitudeController = new TextEditingController(text:widget.pastel.latitude);
+    longitudeController = new TextEditingController(text:widget.pastel.longitude);
     fotoController = (widget.pastel.foto);
     super.initState();
   }
@@ -72,6 +76,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
             }else{
               setState(() {
                 _dateTime = value;
+                fechaController = DateFormat.yMEd().format(_dateTime!).toString();
               });
             }
           }
@@ -108,64 +113,18 @@ class _ScreenPastelState extends State<ScreenPastel>{
                   ),
                   Padding(padding:EdgeInsets.only(top:8.0)),
                   Divider(),
-                  //Ingredientes
+                  //Descripcion
                   Container(
                     padding: EdgeInsets.only(left: 10, right: 10),
                     child: TextField(
-                      controller: ingredientesController,
+                      controller: descripcionController,
                       style: TextStyle(
                         fontWeight:FontWeight.bold,
                         fontSize:18.0),
                       decoration: InputDecoration(
-                        icon: Icon(Icons.tonality_sharp, color: new Color.fromRGBO(48, 71, 94, 1)),
-                        labelText: 'Ingredientes'),
+                        icon: Icon(Icons.description, color: new Color.fromRGBO(48, 71, 94, 1),),
+                        labelText: 'Descripcion'),
                         keyboardType: TextInputType.text,
-                    ),
-                  ),
-                  Padding(padding:EdgeInsets.only(top:8.0)),
-                  Divider(),
-                  //Creador
-                  Container(
-                    padding: EdgeInsets.only(left: 10, right: 10),
-                    child: TextField(
-                      controller: creadorController,
-                      style: TextStyle(
-                        fontWeight:FontWeight.bold,
-                        fontSize:18.0),
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.person, color: new Color.fromRGBO(48, 71, 94, 1),),
-                        labelText: 'Creador(a)'),
-                        keyboardType: TextInputType.text,
-                    ),
-                  ),
-                  Padding(padding:EdgeInsets.only(top:8.0)),
-                  Divider(),
-                  //Fecha
-                  Container(
-                    child: Row(
-                      children: [
-                        Container(
-                          //padding: EdgeInsets.only(left: 10, right: 10),
-                          child: IconButton(
-                            icon: Icon(Icons.date_range_outlined),
-                            color: new Color.fromRGBO(48, 71, 94, 1),
-                            onPressed: _datePresent,
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          child: Row(
-                            children: <Widget>[
-                              Text( _dateTime == null ? 
-                              "No se ha seleccionado una fecha" : DateFormat.yMEd().format(_dateTime!),
-                                  style: TextStyle(
-                                  fontWeight:FontWeight.bold,
-                                  fontSize:16.0),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
                     ),
                   ),
                   Padding(padding:EdgeInsets.only(top:8.0)),
@@ -187,10 +146,75 @@ class _ScreenPastelState extends State<ScreenPastel>{
                   ),
                   Padding(padding:EdgeInsets.only(top:8.0)),
                   Divider(),
+                  //Fecha
+                  Container(
+                    child: Row(
+                      children: [
+                        Container(
+                          //padding: EdgeInsets.only(left: 10, right: 10),
+                          child: IconButton(
+                            icon: Icon(Icons.date_range_outlined),
+                            color: new Color.fromRGBO(48, 71, 94, 1),
+                            onPressed: _datePresent,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          child: Row(
+                            children: <Widget>[
+                              // ignore: unnecessary_null_comparison
+                              Text( fechaController.length < 3 ? 
+                              "No se ha seleccionado una fecha" : fechaController,
+                                  style: TextStyle(
+                                  fontWeight:FontWeight.bold,
+                                  fontSize:16.0),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(padding:EdgeInsets.only(top:8.0)),
+                  Divider(),
+                  //Contacto
+                  Container(
+                    padding: EdgeInsets.only(left: 10, right: 10),
+                    child: TextField(
+                      controller: contactoController,
+                      style: TextStyle(
+                        fontWeight:FontWeight.bold,
+                        fontSize:18.0),
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.phone, color: new Color.fromRGBO(48, 71, 94, 1)),
+                        labelText: 'Contacto'),
+                        keyboardType: TextInputType.number,
+                    ),
+                  ),
+                  Padding(padding:EdgeInsets.only(top:8.0)),
+                  Divider(),
                   //Mapa
                   Container(
                     //padding: EdgeInsets.only(left: 10, right: 10),
                     child: MapaGoogle(),
+                  ),
+                  Padding(padding:EdgeInsets.only(top:8.0)),
+                  Divider(),
+                  //Latitud
+                  Container(
+                    padding: EdgeInsets.only(left: 10, right: 10),
+                    child: TextFormField(
+                      readOnly: true,
+                      controller: latitudeController,
+                      style: TextStyle(
+                        fontWeight:FontWeight.bold,
+                        fontSize:18.0),
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.monetization_on, color: new Color.fromRGBO(48, 71, 94, 1)),
+                        labelText: 'Latitude'),
+                        keyboardType: TextInputType.text,
+                      
+                    ),
                   ),
                   Padding(padding:EdgeInsets.only(top:8.0)),
                   Divider(),
@@ -218,19 +242,19 @@ class _ScreenPastelState extends State<ScreenPastel>{
                           if(widget.pastel.id!=null){
                           pastelRF.child(widget.pastel.id.toString()).set({
                             'articulo':articuloController.text,
-                            'ingredientes':ingredientesController.text,
-                            'creador':creadorController.text,
-                            'fecha':fechaController.text,
+                            'descripcion':descripcionController.text,
+                            'fecha':fechaController,
                             'precio':precioController.text,
+                            'contacto':contactoController.text,
                             'foto': fotoController,
                           }).then((_)=>{Navigator.pop(context)});
                         }else{
                           pastelRF.push().set({
                             'articulo':articuloController.text,
-                            'ingredientes':ingredientesController.text,
-                            'creador':creadorController.text,
-                            'fecha':fechaController.text,
+                            'descripcion':descripcionController.text,
+                            'fecha':fechaController,
                             'precio':precioController.text,
+                            'contacto':contactoController.text,
                             'foto': fotoController,
                           }).then((_)=>{Navigator.pop(context)});
                         }

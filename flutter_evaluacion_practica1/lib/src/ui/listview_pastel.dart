@@ -165,7 +165,7 @@ void dispose(){
     await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ScreenPastel(Pastel(null,'','','','','','')),)
+        builder: (context) => ScreenPastel(Pastel(null,'','','','','','','','')),)
     );
   }
 }

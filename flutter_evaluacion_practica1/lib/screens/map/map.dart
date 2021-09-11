@@ -13,13 +13,13 @@ import 'package:flutter_map/flutter_map.dart';
 
 // ignore: must_be_immutable
 class MapaGoogle extends StatefulWidget {
-  final Location location = Location();
+  late final Location location = Location();
   late Future<LocationData> locData;
-  final MapController controller = MapController();
+  late final MapController controller = MapController();
   //UTE Occidental
-  double lat = -0.17951276077818973;
-  double lng = -78.50650870312631;
-  double zoom = 15;
+  late double lat = -0.17951276077818973;
+  late double lng = -78.50650870312631;
+  late double zoom = 15;
 
   MapaGoogle({Key? key}) : super(key: key) {
     initLocation();
@@ -30,8 +30,8 @@ class MapaGoogle extends StatefulWidget {
   MapaGoogleState createState() => MapaGoogleState();
 
   void initLocation() async {
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
+    late bool _serviceEnabled;
+    late PermissionStatus _permissionGranted;
 
     _serviceEnabled = await location.serviceEnabled();
     if (!_serviceEnabled) {

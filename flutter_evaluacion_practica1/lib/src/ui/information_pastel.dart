@@ -25,7 +25,7 @@ Widget build(BuildContext context){
     resizeToAvoidBottomInset: true,
     appBar: AppBar(
       title:Text("Información"),
-      backgroundColor: Colors.deepPurpleAccent[100],
+      backgroundColor: new Color.fromRGBO(48, 71, 94, 1),
     ),
     body:Container(
       height: 800.0,
@@ -42,25 +42,25 @@ Widget build(BuildContext context){
                 Padding(padding:EdgeInsets.only(top:8.0)),
                 Divider(),
                 new Text(
-                  "Autor: ${widget.pastel.ingredientes}",
+                  "Descripción: ${widget.pastel.descripcion}",
                   style: TextStyle(fontWeight:FontWeight.bold, fontSize:18.0),
                 ),
                 Padding(padding:EdgeInsets.only(top:8.0)),
                 Divider(),
                 new Text(
-                  "Género: ${widget.pastel.creador}",
+                  "Precio: ${widget.pastel.precio}",
                   style: TextStyle(fontWeight:FontWeight.bold, fontSize:18.0),
                 ),
                 Padding(padding:EdgeInsets.only(top:8.0)),
                 Divider(),
                 new Text(
-                  "Editorial: ${widget.pastel.fecha}",
+                  "Fecha de Publicación: ${widget.pastel.fecha}",
                   style: TextStyle(fontWeight:FontWeight.bold, fontSize:18.0),
                 ),
                 Padding(padding:EdgeInsets.only(top:8.0)),
                 Divider(),
                 new Text(
-                  "Número de páginas: ${widget.pastel.precio}",
+                  "Contacto: ${widget.pastel.contacto}",
                   style: TextStyle(fontWeight:FontWeight.bold, fontSize:18.0),
                 ),
                 Padding(padding:EdgeInsets.only(top:8.0)),
