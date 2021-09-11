@@ -6,6 +6,7 @@ import 'package:flutter_evaluacion_practica1/services/auth_services.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 

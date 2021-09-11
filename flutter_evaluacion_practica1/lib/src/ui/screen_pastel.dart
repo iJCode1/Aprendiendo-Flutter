@@ -5,12 +5,14 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_evaluacion_practica1/screens/map/map.dart';
 import 'package:flutter_evaluacion_practica1/screens/uploadButton/button_widget.dart';
 import 'package:flutter_evaluacion_practica1/services/firebase_api.dart';
 import 'package:flutter_evaluacion_practica1/src/model/pastel.dart';
 import 'package:path/path.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class ScreenPastel extends StatefulWidget{
   final Pastel pastel;
   ScreenPastel(this.pastel);
@@ -56,26 +58,25 @@ class _ScreenPastelState extends State<ScreenPastel>{
 
   @override
   Widget build(BuildContext context) {
-    final fileName = file != null ? basename(file!.path) : 'No se ha seleccionado una foto';
-    
+    final fileName = file != null ? basename(file!.path) : 'No se ha seleccionado una foto';    
 
-void _datePresent(){
-    showDatePicker(
-      context: context, 
-      initialDate: DateTime.now(), 
-      firstDate: DateTime(2021), 
-      lastDate: DateTime.now())
-      .then((value){
-        if(value == null){
-          return;
-        }else{
-          setState(() {
-            _dateTime = value;
-          });
-        }
-      }
-    );
-}
+    void _datePresent(){
+        showDatePicker(
+          context: context, 
+          initialDate: DateTime.now(), 
+          firstDate: DateTime(2021), 
+          lastDate: DateTime.now())
+          .then((value){
+            if(value == null){
+              return;
+            }else{
+              setState(() {
+                _dateTime = value;
+              });
+            }
+          }
+        );
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset:true,
@@ -183,6 +184,13 @@ void _datePresent(){
                         labelText: 'Precio'),
                         keyboardType: TextInputType.text,
                     ),
+                  ),
+                  Padding(padding:EdgeInsets.only(top:8.0)),
+                  Divider(),
+                  //Mapa
+                  Container(
+                    //padding: EdgeInsets.only(left: 10, right: 10),
+                    child: MapaGoogle(),
                   ),
                   Padding(padding:EdgeInsets.only(top:8.0)),
                   Divider(),
@@ -294,7 +302,6 @@ void _datePresent(){
           }
         },
       );
-
 }
 
 
