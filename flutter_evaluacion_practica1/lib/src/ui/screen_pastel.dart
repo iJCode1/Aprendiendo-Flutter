@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_evaluacion_practica1/screens/uploadButton/button_widget.dart';
 import 'package:flutter_evaluacion_practica1/services/firebase_api.dart';
 import 'package:flutter_evaluacion_practica1/src/model/pastel.dart';
@@ -137,7 +138,12 @@ class _ScreenPastelState extends State<ScreenPastel>{
       resizeToAvoidBottomInset:true,
       appBar: AppBar(
         title: Text("Articulos"),
-        backgroundColor: new Color.fromRGBO(48, 71, 94, 1),
+        backwardsCompatibility: false,
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: new Color.fromRGBO(48, 71, 94, 1),
+              statusBarIconBrightness: Brightness.light,
+            ),  
+            backgroundColor: new Color.fromRGBO(48, 71, 94, 1),      
       ),
       body: SingleChildScrollView(
         padding:const EdgeInsets.all(20.0),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_evaluacion_practica1/screens/pages/creditos.dart';
-import 'package:flutter_evaluacion_practica1/screens/pages/people_page.dart';
 import 'package:flutter_evaluacion_practica1/screens/pages/user_page.dart';
 import 'package:flutter_evaluacion_practica1/src/model/pastel.dart';
+import 'package:flutter_evaluacion_practica1/src/ui/home.dart';
+import 'package:flutter_evaluacion_practica1/src/ui/listview_pastel.dart';
 import 'package:flutter_evaluacion_practica1/src/ui/screen_pastel.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
@@ -44,20 +45,20 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   buildMenuItem(
-                    text: "Altas 'Vendedor'",
+                    text: "Altas (Vendedor)",
                     icon: Icons.cake,
                     onClicked: () => selectedItem(context, 1),
                   ),
                   const SizedBox(height: 16),
                   buildMenuItem(
-                    text: 'Buscar',
-                    icon: Icons.search,
+                    text: "Comprar (Cliente)",
+                    icon: Icons.shopping_cart,
                     onClicked: () => selectedItem(context, 2),
                   ),
                   const SizedBox(height: 16),
                   buildMenuItem(
-                    text: 'Modificar',
-                    icon: Icons.update_sharp,
+                    text: 'Buscar',
+                    icon: Icons.search,
                     onClicked: () => selectedItem(context, 3),
                   ),
                   const SizedBox(height: 16),
@@ -84,7 +85,7 @@ class NavigationDrawerWidget extends StatelessWidget {
                   buildMenuItem(
                     text: 'Créditos',
                     icon: Icons.person,
-                    onClicked: () => selectedItem(context, 6),
+                    onClicked: () => selectedItem(context, 7),
                   ),
                 ],
               ),
@@ -123,8 +124,6 @@ class NavigationDrawerWidget extends StatelessWidget {
                   ),
                 ],
               ),
-             
-              
             ],
           ),
         ),
@@ -176,17 +175,24 @@ class NavigationDrawerWidget extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => PeoplePage(),
+          builder: (context) => Home(),
         ));
         break;
       case 1:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => ScreenPastel(Pastel(null,'','','','','',0,0,''))),
+        Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) =>
+                  ScreenPastel(Pastel(null, '', '', '', '', '', 0, 0, ''))),
         );
         break;
-      case 6:
+      case 2:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => Creditos()),
+          builder: (context) => ListViewPastel(),
+        ));
+        break;
+      case 7:
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => Creditos()),
         );
         break;
     }

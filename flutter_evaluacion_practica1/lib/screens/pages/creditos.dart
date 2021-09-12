@@ -75,8 +75,8 @@ class Creditos extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.teal.shade900,
                               fontSize: 16.0,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Pacifico'),
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Poppins'),
                         ),
                       ))),
               Card(
@@ -99,8 +99,8 @@ class Creditos extends StatelessWidget {
                         style: TextStyle(
                             color: Colors.teal.shade900,
                             fontSize: 16.0,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'Pacifico'),
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Poppins'),
                       ),
                     ),
                   )),
@@ -124,8 +124,8 @@ class Creditos extends StatelessWidget {
                         style: TextStyle(
                             color: Colors.teal.shade900,
                             fontSize: 16.0,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'Pacifico'),
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Poppins'),
                       ),
                     ),
                   )),

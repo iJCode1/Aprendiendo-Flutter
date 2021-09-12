@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_evaluacion_practica1/src/model/pastel.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -26,6 +27,11 @@ class _InfoPastelState extends State<InfoPastel>{
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
+        backwardsCompatibility: false,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: new Color.fromRGBO(48, 71, 94, 1),
+            statusBarIconBrightness: Brightness.light,
+          ),
         title:Text("Información"),
         backgroundColor: new Color.fromRGBO(48, 71, 94, 1),
       ),
@@ -94,7 +100,7 @@ class _InfoPastelState extends State<InfoPastel>{
                       child: Column(
                         children: [
                             new Text(
-                          "Ubicación real:",
+                          "Ubicación de la Pastelería:",
                             style: TextStyle(fontWeight:FontWeight.bold, fontSize:18.0),
                             textAlign: TextAlign.center,
                           ),
