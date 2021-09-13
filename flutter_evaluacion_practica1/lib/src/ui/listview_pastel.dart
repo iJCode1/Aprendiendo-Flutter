@@ -112,7 +112,7 @@ class _ListViewPastelState extends State<ListViewPastel> {
                               ),
                               Expanded(
                                 child: Container(
-                                  height: 150,
+                                  height: 160,
                                   // color: Colors.indigo,
                                   child: Column(
                                     mainAxisAlignment:
@@ -120,26 +120,28 @@ class _ListViewPastelState extends State<ListViewPastel> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      ListTile(
-                                        title: Text(
-                                          '${items[position].articulo}',
-                                          style: TextStyle(
-                                            fontFamily: 'Poppins',
-                                            fontSize: 22,
-                                            color: new Color.fromRGBO(
-                                                62, 44, 65, 1),
-                                          ),
-                                        ),
-                                        subtitle: Text(
-                                          '\$ ${items[position].precio}',
-                                          style: TextStyle(
+                                      Container(
+                                        child: ListTile(
+                                          title: Text(
+                                            '${items[position].articulo}',
+                                            style: TextStyle(
                                               fontFamily: 'Poppins',
-                                              fontSize: 18,
+                                              fontSize: 22,
                                               color: new Color.fromRGBO(
-                                                  110, 133, 178, 1)),
+                                                  62, 44, 65, 1),
+                                            ),
+                                          ),
+                                          subtitle: Text(
+                                            '\$ ${items[position].precio}',
+                                            style: TextStyle(
+                                                fontFamily: 'Poppins',
+                                                fontSize: 18,
+                                                color: new Color.fromRGBO(
+                                                    110, 133, 178, 1)),
+                                          ),
+                                          onTap: () => _infoPastel(
+                                              context, items[position]),
                                         ),
-                                        onTap: () => _infoPastel(
-                                            context, items[position]),
                                       ),
                                       Container(
                                         //height: 10,

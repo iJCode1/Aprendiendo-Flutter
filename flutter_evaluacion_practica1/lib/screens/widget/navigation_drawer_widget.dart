@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_evaluacion_practica1/screens/pages/buscar.dart';
 import 'package:flutter_evaluacion_practica1/screens/pages/creditos.dart';
 import 'package:flutter_evaluacion_practica1/screens/pages/user_page.dart';
 import 'package:flutter_evaluacion_practica1/src/model/pastel.dart';
@@ -188,6 +189,11 @@ class NavigationDrawerWidget extends StatelessWidget {
       case 2:
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => ListViewPastel(),
+        ));
+        break;
+        case 3:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => Buscar(Pastel(null, '', '', '', '', '', 0, 0, '')),
         ));
         break;
       case 7:
