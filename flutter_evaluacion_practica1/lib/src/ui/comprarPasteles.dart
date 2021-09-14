@@ -17,7 +17,7 @@ class ComprarPastel extends StatefulWidget {
   _ComprarPastelState createState() => _ComprarPastelState();
 }
 
-final pastelRF = FirebaseDatabase.instance.reference().child('pastel');
+final pastelRF = FirebaseDatabase.instance.reference().child('pastel').orderByChild("status").equalTo("Activo");
 
 class _ComprarPastelState extends State<ComprarPastel> {
   late List<Pastel> items;
@@ -49,7 +49,7 @@ class _ComprarPastelState extends State<ComprarPastel> {
     final loginProvider = Provider.of<AuthServices>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Comprar un Producto',
+      title: 'Comprar un Pastel',
       home: Scaffold(
         drawer: NavigationDrawerWidget(),
         resizeToAvoidBottomInset: true,
@@ -59,7 +59,7 @@ class _ComprarPastelState extends State<ComprarPastel> {
             statusBarColor: new Color.fromRGBO(48, 71, 94, 1),
             statusBarIconBrightness: Brightness.light,
           ),
-          title: Text("Comprar un Producto"),
+          title: Text("Comprar un Pastel"),
           backgroundColor: new Color.fromRGBO(48, 71, 94, 1),
           actions: [
             IconButton(
@@ -144,7 +144,7 @@ class _ComprarPastelState extends State<ComprarPastel> {
                                                     110, 133, 178, 1)),
                                           ),
                                           onTap: () => _infoPastel(
-                                              context, items[position]),
+                                              context, items[position], ''),
                                         ),
                                       ),
                                       Container(
@@ -221,10 +221,12 @@ class _ComprarPastelState extends State<ComprarPastel> {
                                                             style: TextStyle(color: Colors.black45, fontSize: 18, fontWeight: FontWeight.w700, fontFamily: 'Lato'),
                                                           ),
                                                           onPressed: () => {
+                                                            _infoPastel(
+                                                              context, items[position], '${items[position].status}'),
                                                             // statusComprado = true,
                                                             // print(statusComprado),
-                                                            print("Comprado"),
-                                                            Navigator.of(context).pop(),
+                                                            // print("Comprado"),
+                                                            // Navigator.of(context).pop(),
                                                           },
                                                           gradient: LinearGradient(colors: [
                                                             Color.fromRGBO(145, 255, 243, 1.0),
@@ -309,11 +311,11 @@ class _ComprarPastelState extends State<ComprarPastel> {
     });
   }
 
-  void _infoPastel(BuildContext context, Pastel pastel) async {
+  void _infoPastel(BuildContext context, Pastel pastel, statusActual) async {
     await Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ScreenPastel(pastel),
+          builder: (context) => ScreenPastel(pastel, true, statusActual),
         ));
   }
 
@@ -322,7 +324,7 @@ class _ComprarPastelState extends State<ComprarPastel> {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              ScreenPastel(Pastel(null, '', '', '', '', '','', 0, 0,'')),
+              ScreenPastel(Pastel(null, '', '', '', '', '','', 0, 0,''), false, ""),
         ));
   }
 }

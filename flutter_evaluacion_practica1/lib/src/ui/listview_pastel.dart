@@ -47,7 +47,7 @@ class _ListViewPastelState extends State<ListViewPastel> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Productos',
+      title: 'Administración de Pasteles',
       home: Scaffold(
         drawer: NavigationDrawerWidget(),
         resizeToAvoidBottomInset: true,
@@ -57,7 +57,7 @@ class _ListViewPastelState extends State<ListViewPastel> {
             statusBarColor: new Color.fromRGBO(48, 71, 94, 1),
             statusBarIconBrightness: Brightness.light,
           ),
-          title: Text("Productos"),
+          title: Text("Administración de Pasteles"),
           backgroundColor: new Color.fromRGBO(48, 71, 94, 1),
           actions: [
             IconButton(
@@ -113,7 +113,7 @@ class _ListViewPastelState extends State<ListViewPastel> {
                               ),
                               Expanded(
                                 child: Container(
-                                  height: 160,
+                                  height: 180,
                                   // color: Colors.indigo,
                                   child: Column(
                                     mainAxisAlignment:
@@ -133,7 +133,7 @@ class _ListViewPastelState extends State<ListViewPastel> {
                                             ),
                                           ),
                                           subtitle: Text(
-                                            '\$ ${items[position].precio}',
+                                            '\$ ${items[position].precio} \nStatus: ${items[position].status}',
                                             style: TextStyle(
                                                 fontFamily: 'Lato',
                                                 fontWeight: FontWeight.bold,
@@ -142,7 +142,7 @@ class _ListViewPastelState extends State<ListViewPastel> {
                                                     110, 133, 178, 1)),
                                           ),
                                           onTap: () => _infoPastel(
-                                              context, items[position]),
+                                              context, items[position], ""),
                                         ),
                                       ),
                                       Container(
@@ -210,6 +210,16 @@ class _ListViewPastelState extends State<ListViewPastel> {
                                                                 110, 133, 178, 1)),
                                                           ),
                                                           Padding(padding: EdgeInsets.only(bottom: 20)),
+                                                          Text(
+                                                            'Status: ${items[position].status}',
+                                                            style: TextStyle(
+                                                            fontFamily: 'Lato',
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 18,
+                                                            color: new Color.fromRGBO(
+                                                                110, 133, 178, 1)),
+                                                          ),
+                                                          Padding(padding: EdgeInsets.only(bottom: 20)),
                                                         ],
                                                       ), 
                                                       content: SingleChildScrollView(
@@ -247,8 +257,10 @@ class _ListViewPastelState extends State<ListViewPastel> {
                                                             style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700, fontFamily: 'Lato'),
                                                           ),
                                                           onPressed: () => {
-                                                            print("Baja Lógica"),
-                                                            Navigator.of(context).pop(),
+                                                            _infoPastel(
+                                                              context, items[position], '${items[position].status}'),
+                                                            //print("Baja Lógica"),
+                                                            //Navigator.of(context).pop(),
                                                           },
                                                           gradient: LinearGradient(colors: [
                                                             Color.fromRGBO(116, 116, 191, 1.0),
@@ -320,11 +332,11 @@ class _ListViewPastelState extends State<ListViewPastel> {
     });
   }
 
-  void _infoPastel(BuildContext context, Pastel pastel) async {
+  void _infoPastel(BuildContext context, Pastel pastel, statusActual) async {
     await Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ScreenPastel(pastel),
+          builder: (context) => ScreenPastel(pastel, true, statusActual),
         ));
   }
 
@@ -353,7 +365,7 @@ class _ListViewPastelState extends State<ListViewPastel> {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              ScreenPastel(Pastel(null, '', '', '', '', '','', 0, 0,'')),
+              ScreenPastel(Pastel(null, '', '', '', '', '','', 0, 0,''), false, ""),
         ));
   }
 }

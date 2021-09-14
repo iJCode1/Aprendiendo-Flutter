@@ -114,7 +114,7 @@ class _ListViewInactivosState extends State<ListViewInactivos> {
                               ),
                               Expanded(
                                 child: Container(
-                                  height: 160,
+                                  height: 180,
                                   // color: Colors.indigo,
                                   child: Column(
                                     mainAxisAlignment:
@@ -195,6 +195,16 @@ class _ListViewInactivosState extends State<ListViewInactivos> {
                                                           ),
                                                           Padding(padding: EdgeInsets.only(bottom: 10)),
                                                           Text(
+                                                            'Status: ${items[position].status}',
+                                                            style: TextStyle(
+                                                            fontFamily: 'Lato',
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 18,
+                                                            color: new Color.fromRGBO(
+                                                                110, 133, 178, 1)),
+                                                          ),
+                                                          Padding(padding: EdgeInsets.only(bottom: 10)),
+                                                          Text(
                                                             'Fecha: ${items[position].fecha}',
                                                             style: TextStyle(
                                                             fontFamily: 'Lato',
@@ -220,10 +230,12 @@ class _ListViewInactivosState extends State<ListViewInactivos> {
                                                             style: TextStyle(color: Colors.black45, fontSize: 18, fontWeight: FontWeight.w700, fontFamily: 'Lato'),
                                                           ),
                                                           onPressed: () => {
-                                                            statusComprado = true,
-                                                            print(statusComprado),
-                                                            print("Comprado"),
-                                                            Navigator.of(context).pop(),
+                                                            // statusComprado = true,
+                                                            // print(statusComprado),
+                                                            // print("Comprado"),
+                                                            _infoPastel(
+                                                              context, items[position]),
+                                                            //Navigator.of(context).pop(),
                                                           },
                                                           gradient: LinearGradient(colors: [
                                                             Color.fromRGBO(145, 255, 243, 1.0),
@@ -312,7 +324,7 @@ class _ListViewInactivosState extends State<ListViewInactivos> {
     await Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ScreenPastel(pastel),
+          builder: (context) => ScreenPastel(pastel, true, ""),
         ));
   }
 
@@ -321,7 +333,7 @@ class _ListViewInactivosState extends State<ListViewInactivos> {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              ScreenPastel(Pastel(null, '', '', '', '', '','', 0, 0,'')),
+              ScreenPastel(Pastel(null, '', '', '', '', '','', 0, 0,''), false, ""),
         ));
   }
 }

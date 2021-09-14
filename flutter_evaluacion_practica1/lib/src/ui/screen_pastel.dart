@@ -16,6 +16,8 @@ import 'package:location/location.dart';
 import 'package:path/path.dart';
 import 'package:intl/intl.dart';
 
+var cambiarEstado = false;
+var statusActuall = "";
 // ignore: must_be_immutable
 class ScreenPastel extends StatefulWidget{
 
@@ -30,9 +32,22 @@ class ScreenPastel extends StatefulWidget{
 // * Mapa **********************
 
   final Pastel pastel;
-  ScreenPastel(this.pastel){
+  final bool activar;
+  final String statusActual;
+  ScreenPastel(this.pastel, this.activar, this.statusActual){
     initLocation();
     locData = getLocation();
+    print("El estado es.......");
+    print(activar);
+    print("El Status es.......");
+    print(statusActual);
+
+    if(activar == true){
+      cambiarEstado = true;
+      statusActuall = statusActual;
+    }else{
+      cambiarEstado = false;
+    }
   }
 
   @override
@@ -92,6 +107,8 @@ class _ScreenPastelState extends State<ScreenPastel>{
   List _status = ["Activo", "Inactivo"];
 
   late File sampleImage;
+
+  static bool get activar => activar;
 
 
   @override
@@ -256,7 +273,8 @@ class _ScreenPastelState extends State<ScreenPastel>{
                             alignedDropdown: true,
                             child: DropdownButton<String>(
                               // fotoController.length < 10 ? Container() : new Image.file(new File(fotoController)),
-                              value: statusController.isNotEmpty ? statusController : statusElegido,
+                              value: statusController.isNotEmpty ? ( cambiarEstado ? (statusActuall == "Activo" ? "Inactivo" : "Activo") : statusController) : statusElegido,
+                              // value: statusController.isNotEmpty ? statusController : statusElegido,
                               //value: statusElegido,
                               iconSize: 30,
                               //icon: (null),
@@ -448,12 +466,13 @@ class _ScreenPastelState extends State<ScreenPastel>{
                   Divider(),
                   TextButton(
                     onPressed: (){
+                      //print(activar);
                           if(widget.pastel.id!=null){
                           pastelRF.child(widget.pastel.id.toString()).set({
                             'articulo':articuloController.text,
                             'descripcion':descripcionController.text,
                             'fecha':fechaController,
-                            'status':statusController,
+                            'status': ( cambiarEstado ? (statusActuall == "Activo" ? "Inactivo" : "Activo") : statusController),
                             'precio':precioController.text,
                             'contacto':contactoController.text,
                             'latitude': latitudeController,
@@ -465,7 +484,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                             'articulo':articuloController.text,
                             'descripcion':descripcionController.text,
                             'fecha':fechaController,
-                            'status':statusController,
+                            'status': ( cambiarEstado ? (statusActuall == "Activo" ? "Inactivo" : "Activo") : statusController),
                             'precio':precioController.text,
                             'contacto':contactoController.text,
                             'latitude': latitudeController,
@@ -517,7 +536,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
     if (file == null) return;
 
     final fileName = basename(file!.path);
-    final destination = 'files/$fileName';
+    final destination = 'pasteles/$fileName';
 
     task = FirebaseApi.uploadFile(destination, file!);
     setState(() {});

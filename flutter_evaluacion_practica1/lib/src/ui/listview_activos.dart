@@ -115,7 +115,7 @@ class _ListViewActivosState extends State<ListViewActivos> {
                               ),
                               Expanded(
                                 child: Container(
-                                  height: 160,
+                                  height: 180,
                                   // color: Colors.indigo,
                                   child: Column(
                                     mainAxisAlignment:
@@ -312,7 +312,7 @@ class _ListViewActivosState extends State<ListViewActivos> {
     await Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ScreenPastel(pastel),
+          builder: (context) => ScreenPastel(pastel, false, ""),
         ));
   }
 
@@ -341,7 +341,7 @@ class _ListViewActivosState extends State<ListViewActivos> {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              ScreenPastel(Pastel(null, '', '', '', '', '','', 0, 0,'')),
+              ScreenPastel(Pastel(null, '', '', '', '', '','', 0, 0,''), false, ""),
         ));
   }
 }

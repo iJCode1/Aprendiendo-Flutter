@@ -77,14 +77,14 @@ class NavigationDrawerWidget extends StatelessWidget {
                   Divider(color: Colors.white70),
                   const SizedBox(height: 10),
                   buildMenuItem(
-                    text: 'Productos Activos',
+                    text: 'Pasteles Activos',
                     icon: Icons.check,
                     onClicked: () => selectedItem(context, 5),
                   ),
                   const SizedBox(height: 10),
                   buildMenuItem(
-                    text: 'Productos Inactivos',
-                    icon: Icons.crop_square_sharp,
+                    text: 'Pasteles Inactivos',
+                    icon: Icons.close,
                     onClicked: () => selectedItem(context, 6),
                   ),
                   const SizedBox(height: 10),
@@ -190,7 +190,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
               builder: (context) =>
-                  ScreenPastel(Pastel(null, '', '', '', '', '', '', 0, 0, ''))),
+                  ScreenPastel(Pastel(null, '', '', '', '', '', '', 0, 0, ''), false, "")),
         );
         break;
       case 2:
