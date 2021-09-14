@@ -100,7 +100,8 @@ class _ScreenPastelState extends State<ScreenPastel>{
     descripcionController = new TextEditingController(text:widget.pastel.descripcion);
     precioController = new TextEditingController(text:widget.pastel.precio);
     fechaController = (widget.pastel.fecha)!;
-    statusController = (widget.pastel.fecha)!;
+    statusController = (widget.pastel.status)!;
+    //print(statusController);
     contactoController = new TextEditingController(text:widget.pastel.contacto);
     latitudeController = (widget.pastel.latitude);
     longitudeController = (widget.pastel.longitude);
@@ -254,9 +255,11 @@ class _ScreenPastelState extends State<ScreenPastel>{
                           child: ButtonTheme(
                             alignedDropdown: true,
                             child: DropdownButton<String>(
-                              value: statusElegido,
+                              // fotoController.length < 10 ? Container() : new Image.file(new File(fotoController)),
+                              // value: statusController.length > 5 ? statusController : statusElegido,
+                              value: statusController.isEmpty ? statusElegido : statusController.toString(),
                               iconSize: 30,
-                              icon: (null),
+                              //icon: (null),
                               style: TextStyle(
                                 color: new Color.fromRGBO(48, 71, 94, 1),
                                 fontSize: 16,
@@ -266,7 +269,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                               hint: Text('Seleccionar el estatus del producto'),
                               onChanged: (newValue){
                                 setState(() {
-                                  statusElegido = newValue;
+                                  statusElegido = newValue!;
                                   print(statusElegido);
                                 });
                               },

@@ -135,7 +135,8 @@ class _ListViewPastelState extends State<ListViewPastel> {
                                           subtitle: Text(
                                             '\$ ${items[position].precio}',
                                             style: TextStyle(
-                                                fontFamily: 'Poppins',
+                                                fontFamily: 'Lato',
+                                                fontWeight: FontWeight.bold,
                                                 fontSize: 18,
                                                 color: new Color.fromRGBO(
                                                     110, 133, 178, 1)),
@@ -168,12 +169,53 @@ class _ListViewPastelState extends State<ListViewPastel> {
                                                           Padding(padding: EdgeInsets.only(top: 10, bottom: 20)),
                                                           Image.network('https://firebasestorage.googleapis.com/v0/b/flutter-evaluacion-practica1.appspot.com/o/imagenes%2Ficon_error.png?alt=media&token=ca100e99-53db-417f-afa2-3b3ded8073c6',
                                                           width: 50, height: 50, fit: BoxFit.contain,),
+                                                          Padding(padding: EdgeInsets.only(bottom: 20)),
+                                                          Text(
+                                                            'Datos:',
+                                                            style: TextStyle(
+                                                              fontFamily: 'Poppins',
+                                                              fontSize: 22,
+                                                              color: new Color.fromRGBO(
+                                                                  62, 44, 65, 1),
+                                                            ),
+                                                          ),
+                                                          Padding(padding: EdgeInsets.only(bottom: 10)),
+                                                          Text(
+                                                            'Articulo: ${items[position].articulo}',
+                                                            style: TextStyle(
+                                                            fontFamily: 'Lato',
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 18,
+                                                            color: new Color.fromRGBO(
+                                                                110, 133, 178, 1)),
+                                                          ),
+                                                          Padding(padding: EdgeInsets.only(bottom: 10)),
+                                                          Text(
+                                                            'Precio: \$ ${items[position].precio}',
+                                                            style: TextStyle(
+                                                            fontFamily: 'Lato',
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 18,
+                                                            color: new Color.fromRGBO(
+                                                                110, 133, 178, 1)),
+                                                          ),
+                                                          Padding(padding: EdgeInsets.only(bottom: 20)),
+                                                          Text(
+                                                            'Fecha: ${items[position].fecha}',
+                                                            style: TextStyle(
+                                                            fontFamily: 'Lato',
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 18,
+                                                            color: new Color.fromRGBO(
+                                                                110, 133, 178, 1)),
+                                                          ),
+                                                          Padding(padding: EdgeInsets.only(bottom: 20)),
                                                         ],
                                                       ), 
                                                       content: SingleChildScrollView(
                                                         child: ListBody(
                                                           children: [
-                                                            Text('¿Eliminar Producto?', style: TextStyle(fontFamily: "Lato", fontWeight: FontWeight.w700, fontSize: 20, color: Colors.red[300]),),
+                                                            Center(child: Text('¿Eliminar Producto?', style: TextStyle(fontFamily: "Lato", fontWeight: FontWeight.w700, fontSize: 20, color: Colors.red[300]),)),
                                                           ],
                                                         ),
                                                       ),
@@ -205,7 +247,8 @@ class _ListViewPastelState extends State<ListViewPastel> {
                                                             style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700, fontFamily: 'Lato'),
                                                           ),
                                                           onPressed: () => {
-                                                            // Navigator.pop(context),
+                                                            print("Baja Lógica"),
+                                                            Navigator.of(context).pop(),
                                                           },
                                                           gradient: LinearGradient(colors: [
                                                             Color.fromRGBO(116, 116, 191, 1.0),
@@ -310,7 +353,7 @@ class _ListViewPastelState extends State<ListViewPastel> {
         context,
         MaterialPageRoute(
           builder: (context) =>
-              ScreenPastel(Pastel(null, '', '', '', '', '', 0, 0, '')),
+              ScreenPastel(Pastel(null, '', '', '', '', '','', 0, 0,'')),
         ));
   }
 }

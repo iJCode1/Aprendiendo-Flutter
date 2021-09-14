@@ -116,10 +116,7 @@ class _Buscar extends State<Buscar> {
                               EdgeInsets.only(top: 10, left: 10, right: 10),
                           child: new Text(
                             "Nombre del Articulo: $articulo",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0,
-                            ),
+                            style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400, fontFamily: 'Poppins'),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -130,8 +127,7 @@ class _Buscar extends State<Buscar> {
                               EdgeInsets.only(top: 10, left: 10, right: 10),
                           child: new Text(
                             "Descripción: $descripcion",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18.0),
+                            style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400, fontFamily: 'Poppins'),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -142,8 +138,7 @@ class _Buscar extends State<Buscar> {
                               EdgeInsets.only(top: 10, left: 10, right: 10),
                           child: new Text(
                             "Precio: \$$precio",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18.0),
+                            style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400, fontFamily: 'Poppins'),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -154,8 +149,7 @@ class _Buscar extends State<Buscar> {
                               EdgeInsets.only(top: 10, left: 10, right: 10),
                           child: new Text(
                             "Fecha de Publicación: $fecha",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18.0),
+                            style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400, fontFamily: 'Poppins'),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -166,8 +160,7 @@ class _Buscar extends State<Buscar> {
                               EdgeInsets.only(top: 10, left: 10, right: 10),
                           child: new Text(
                             "Estatus del producto: $status",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18.0),
+                            style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400, fontFamily: 'Poppins'),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -178,8 +171,7 @@ class _Buscar extends State<Buscar> {
                               EdgeInsets.only(top: 10, left: 10, right: 10),
                           child: new Text(
                             "Contacto: $contacto",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18.0),
+                            style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400, fontFamily: 'Poppins'),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -193,9 +185,7 @@ class _Buscar extends State<Buscar> {
                               children: [
                                 new Text(
                                   "Ubicación de la Pastelería:",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0),
+                                  style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400, fontFamily: 'Poppins'),
                                   textAlign: TextAlign.center,
                                 ),
                                 Container(
@@ -247,9 +237,7 @@ class _Buscar extends State<Buscar> {
                               children: [
                                 new Text(
                                   "Fotografía del producto:",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0),
+                                  style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400, fontFamily: 'Poppins'),
                                   textAlign: TextAlign.center,
                                 ),
                                 Container(
@@ -354,6 +342,7 @@ class _Buscar extends State<Buscar> {
       // print(respuesta);
     } catch (e) {
       print("Errrroooorr");
+      seEncontroAlgo = false;
     }
     print(seEncontroAlgo);
   }

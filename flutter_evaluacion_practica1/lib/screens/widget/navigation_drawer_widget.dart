@@ -183,7 +183,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
               builder: (context) =>
-                  ScreenPastel(Pastel(null, '', '', '', '', '', 0, 0, ''))),
+                  ScreenPastel(Pastel(null, '', '', '', '', '', '', 0, 0, ''))),
         );
         break;
       case 2:
@@ -193,7 +193,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         break;
         case 3:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => Buscar(Pastel(null, '', '', '', '', '', 0, 0, '')),
+          builder: (context) => Buscar(Pastel(null, '', '', '', '', '', '',0, 0, '')),
         ));
         break;
       case 7:

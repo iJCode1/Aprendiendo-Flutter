@@ -12,7 +12,7 @@ class Pastel{
   late double longitude;
   late String foto;
 
-  Pastel (this.id, this.articulo, this.descripcion, this.precio, this.fecha, this.contacto, this.latitude, this.longitude, this.foto);
+  Pastel (this.id, this.articulo, this.descripcion, this.precio, this.fecha, this.status, this.contacto, this.latitude, this.longitude, this.foto);
 
   Pastel.map(dynamic obj){
     this.articulo = obj['articulo'];
