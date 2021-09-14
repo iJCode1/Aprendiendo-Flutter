@@ -25,6 +25,7 @@ String? articulo = "";
 String? contacto = "";
 String? descripcion = "";
 String? fecha = "";
+String? status = "";
 String? foto = "";
 double? latitude = 0;
 double? longitude = 0;
@@ -140,7 +141,7 @@ class _Buscar extends State<Buscar> {
                           padding:
                               EdgeInsets.only(top: 10, left: 10, right: 10),
                           child: new Text(
-                            "Precio: $precio",
+                            "Precio: \$$precio",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18.0),
                             textAlign: TextAlign.center,
@@ -153,6 +154,18 @@ class _Buscar extends State<Buscar> {
                               EdgeInsets.only(top: 10, left: 10, right: 10),
                           child: new Text(
                             "Fecha de Publicación: $fecha",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18.0),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.only(top: 8.0)),
+                        Divider(),
+                        Container(
+                          padding:
+                              EdgeInsets.only(top: 10, left: 10, right: 10),
+                          child: new Text(
+                            "Estatus del producto: $status",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 18.0),
                             textAlign: TextAlign.center,
@@ -317,13 +330,13 @@ class _Buscar extends State<Buscar> {
           await pastelRef.child(id).once().then((DataSnapshot dataSnapshot) => {
                 //print(dataSnapshot),
                 //print(dataSnapshot.value),
-                print(dataSnapshot.value.values),
+                //print(dataSnapshot.value.values),
                 //valores = [...dataSnapshot.value.values],
                 if (respuesta != null)
                   {
                     seEncontroAlgo = true,
                     valores = [...dataSnapshot.value.values],
-                    print(valores[0]),
+                    print(valores[8]),
                     articulo = valores[0],
                     contacto = valores[1],
                     descripcion = valores[2],
@@ -332,12 +345,13 @@ class _Buscar extends State<Buscar> {
                     latitude = valores[5],
                     longitude = valores[6],
                     precio = valores[7],
+                    status = valores[8],
                   }
                 else
                   {seEncontroAlgo = false},
               });
-      print("Respuestaaaaaa");
-      print(respuesta);
+      // print("Respuestaaaaaa");
+      // print(respuesta);
     } catch (e) {
       print("Errrroooorr");
     }

@@ -6,6 +6,7 @@ class Pastel{
   String? descripcion;
   String? precio;
   String? fecha;
+  String? status;
   String? contacto;
   late double latitude;
   late double longitude;
@@ -18,6 +19,7 @@ class Pastel{
     this.descripcion = obj['descripcion'];
     this.precio = obj['precio'];
     this.fecha = obj['fecha'];
+    this.status = obj['status'];
     this.contacto = obj['contacto'];
     this.latitude = obj['latitude'];
     this.longitude = obj['longitude'];
@@ -29,6 +31,7 @@ class Pastel{
   String? get getDescripcion => descripcion;
   String? get getPrecio => precio;
   String? get getFecha => fecha;
+  String? get getStatus => status;
   String? get getContacto => contacto;
   double? get getLatitude => latitude;
   double? get getLongitude => longitude;
@@ -40,6 +43,7 @@ class Pastel{
     descripcion = snapshot.value['descripcion'];
     precio = snapshot.value['precio'];
     fecha = snapshot.value['fecha'];
+    status = snapshot.value['status'];
     contacto = snapshot.value['contacto'];
     latitude = snapshot.value['latitude'];
     longitude = snapshot.value['longitude'];

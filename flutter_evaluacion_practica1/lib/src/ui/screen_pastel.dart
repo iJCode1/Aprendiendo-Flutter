@@ -78,6 +78,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
   late TextEditingController descripcionController;
   late TextEditingController precioController;
   late String fechaController = "";
+  late String statusController = "";
   late TextEditingController contactoController;
   late double latitudeController;
   late double longitudeController;
@@ -86,6 +87,9 @@ class _ScreenPastelState extends State<ScreenPastel>{
   final _formkey = GlobalKey<FormState>();
   UploadTask? task;
   File? file;
+
+  String? statusElegido;
+  List _status = ["Activo", "Inactivo"];
 
   late File sampleImage;
 
@@ -96,6 +100,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
     descripcionController = new TextEditingController(text:widget.pastel.descripcion);
     precioController = new TextEditingController(text:widget.pastel.precio);
     fechaController = (widget.pastel.fecha)!;
+    statusController = (widget.pastel.fecha)!;
     contactoController = new TextEditingController(text:widget.pastel.contacto);
     latitudeController = (widget.pastel.latitude);
     longitudeController = (widget.pastel.longitude);
@@ -160,6 +165,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                       controller: articuloController,
                       style: TextStyle(
                         fontWeight:FontWeight.bold,
+                        fontFamily: "Lato",
                         fontSize:18.0),
                       decoration: InputDecoration(
                         icon: Icon(Icons.cake, color: new Color.fromRGBO(48, 71, 94, 1)),
@@ -176,6 +182,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                       controller: descripcionController,
                       style: TextStyle(
                         fontWeight:FontWeight.bold,
+                        fontFamily: "Lato",
                         fontSize:18.0),
                       decoration: InputDecoration(
                         icon: Icon(Icons.description, color: new Color.fromRGBO(48, 71, 94, 1),),
@@ -193,6 +200,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                       validator: (val) => val!.isNotEmpty ? null : 'Ingresa un precio',
                       style: TextStyle(
                         fontWeight:FontWeight.bold,
+                        fontFamily: "Lato",
                         fontSize:18.0),
                       decoration: InputDecoration(
                         icon: Icon(Icons.monetization_on, color: new Color.fromRGBO(48, 71, 94, 1)),
@@ -223,6 +231,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                               "No se ha seleccionado una fecha" : fechaController,
                                   style: TextStyle(
                                   fontWeight:FontWeight.bold,
+                                  fontFamily: "Lato",
                                   fontSize:16.0),
                               ),
                             ],
@@ -233,6 +242,67 @@ class _ScreenPastelState extends State<ScreenPastel>{
                   ),
                   Padding(padding:EdgeInsets.only(top:8.0)),
                   Divider(),
+                  //DropDown Status
+                  Container(
+                  padding: EdgeInsets.only(left: 15, right: 15, top: 5),
+                  color: Colors.white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                        child: DropdownButtonHideUnderline(
+                          child: ButtonTheme(
+                            alignedDropdown: true,
+                            child: DropdownButton<String>(
+                              value: statusElegido,
+                              iconSize: 30,
+                              icon: (null),
+                              style: TextStyle(
+                                color: new Color.fromRGBO(48, 71, 94, 1),
+                                fontSize: 16,
+                                fontWeight:FontWeight.bold,
+                                fontFamily: "Lato",
+                              ),
+                              hint: Text('Seleccionar el estatus del producto'),
+                              onChanged: (newValue){
+                                setState(() {
+                                  statusElegido = newValue;
+                                  print(statusElegido);
+                                });
+                              },
+                              items: _status.map((valueItem) {
+                                return DropdownMenuItem(
+                                  value: valueItem.toString(),
+                                  child: Text(valueItem.toString()),
+                                );
+                              }
+                              ).toList(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                  // Center(
+                  //   child: DropdownButton(
+                  //     value: statusElegido,
+                  //     onChanged: (newValue){
+                  //       setState(() {
+                  //         statusElegido = newValue as String?;
+                  //         print(statusElegido);
+                  //       });
+                  //     },
+                  //     items: _status.map((valueItem){
+                  //       return DropdownMenuItem(
+                  //         value: valueItem,
+                  //         child: Text(valueItem),
+                  //       );
+                  //     }).toList(),
+                  //   ),
+                  // ),
+                  Padding(padding:EdgeInsets.only(top:8.0)),
+                  Divider(),
                   //Contacto
                   Container(
                     padding: EdgeInsets.only(left: 10, right: 10),
@@ -240,6 +310,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                       controller: contactoController,
                       style: TextStyle(
                         fontWeight:FontWeight.bold,
+                        fontFamily: "Lato",
                         fontSize:18.0),
                       decoration: InputDecoration(
                         icon: Icon(Icons.phone, color: new Color.fromRGBO(48, 71, 94, 1)),
@@ -322,6 +393,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                       readOnly: true,
                       style: TextStyle(
                         fontWeight:FontWeight.bold,
+                        fontFamily: "Lato",
                         fontSize:18.0),
                       decoration: InputDecoration(
                         icon: Icon(Icons.map_sharp, color: new Color.fromRGBO(48, 71, 94, 1)),
@@ -339,6 +411,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                       readOnly: true,
                       style: TextStyle(
                         fontWeight:FontWeight.bold,
+                        fontFamily: "Lato",
                         fontSize:18.0),
                       decoration: InputDecoration(
                         icon: Icon(Icons.map_sharp, color: new Color.fromRGBO(48, 71, 94, 1)),
@@ -365,7 +438,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                     padding:EdgeInsets.only(left: 15, top:10, right: 15, bottom: 10),
                     child: Text(
                       fileName,
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, fontFamily: "Lato",),
                     ),
                   ),
                   Padding(padding:EdgeInsets.only(top:8.0)),
@@ -377,6 +450,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                             'articulo':articuloController.text,
                             'descripcion':descripcionController.text,
                             'fecha':fechaController,
+                            'status':statusElegido,
                             'precio':precioController.text,
                             'contacto':contactoController.text,
                             'latitude': latitudeController,
@@ -388,6 +462,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                             'articulo':articuloController.text,
                             'descripcion':descripcionController.text,
                             'fecha':fechaController,
+                            'status':statusElegido,
                             'precio':precioController.text,
                             'contacto':contactoController.text,
                             'latitude': latitudeController,
@@ -407,14 +482,6 @@ class _ScreenPastelState extends State<ScreenPastel>{
       ),
     );
   }
-  //******************************* Obtener Imagenes *******************************
-  // Future getImage() async {
-  //   var tempImage = await FilePicker.pickImage(source: ImageSource.gallery);
-
-  //   setState(() {
-  //     sampleImage = tempImage;
-  //    });
-  // }
   //******************************* Subir Imagenes *******************************
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
@@ -471,7 +538,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
 
             return Text(
               '$percentage %',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: "Lato",),
             );
           } else {
             return Container();

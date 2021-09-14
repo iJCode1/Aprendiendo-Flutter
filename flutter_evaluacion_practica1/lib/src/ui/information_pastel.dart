@@ -86,6 +86,16 @@ class _InfoPastelState extends State<InfoPastel>{
                   Container(
                     padding: EdgeInsets.only(top: 10, left: 10, right: 10),
                     child: new Text(
+                      "Estatus del Producto: ${widget.pastel.status}",
+                      style: TextStyle(fontWeight:FontWeight.bold, fontSize:18.0),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Padding(padding:EdgeInsets.only(top:8.0)),
+                  Divider(),
+                  Container(
+                    padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+                    child: new Text(
                       "Contacto: ${widget.pastel.contacto}",
                       style: TextStyle(fontWeight:FontWeight.bold, fontSize:18.0),
                       textAlign: TextAlign.center,
