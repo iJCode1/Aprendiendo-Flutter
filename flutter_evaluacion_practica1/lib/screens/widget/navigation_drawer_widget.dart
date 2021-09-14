@@ -3,7 +3,10 @@ import 'package:flutter_evaluacion_practica1/screens/pages/buscar.dart';
 import 'package:flutter_evaluacion_practica1/screens/pages/creditos.dart';
 import 'package:flutter_evaluacion_practica1/screens/pages/user_page.dart';
 import 'package:flutter_evaluacion_practica1/src/model/pastel.dart';
+import 'package:flutter_evaluacion_practica1/src/ui/comprarPasteles.dart';
 import 'package:flutter_evaluacion_practica1/src/ui/home.dart';
+import 'package:flutter_evaluacion_practica1/src/ui/listview_activos.dart';
+import 'package:flutter_evaluacion_practica1/src/ui/listview_inactivos.dart';
 import 'package:flutter_evaluacion_practica1/src/ui/listview_pastel.dart';
 import 'package:flutter_evaluacion_practica1/src/ui/screen_pastel.dart';
 
@@ -38,51 +41,55 @@ class NavigationDrawerWidget extends StatelessWidget {
                 children: [
                   // const SizedBox(height: 12),
                   //buildSearchField(),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 10),
                   buildMenuItem(
                     text: 'Inicio',
                     icon: Icons.home,
                     onClicked: () => selectedItem(context, 0),
                   ),
-                  const SizedBox(height: 12),
+                  Divider(color: Colors.white70),
+                  const SizedBox(height: 10),
                   buildMenuItem(
                     text: "Altas (Vendedor)",
                     icon: Icons.cake,
                     onClicked: () => selectedItem(context, 1),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 10),
+                  buildMenuItem(
+                    text: "Administración de Pasteles (Vendedor)",
+                    icon: Icons.cake_outlined,
+                    onClicked: () => selectedItem(context, 2),
+                  ),
+                  const SizedBox(height: 10),
+                  Divider(color: Colors.white70),
+                  const SizedBox(height: 10),
                   buildMenuItem(
                     text: "Comprar (Cliente)",
                     icon: Icons.shopping_cart,
-                    onClicked: () => selectedItem(context, 2),
+                    onClicked: () => selectedItem(context, 3),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 10),
                   buildMenuItem(
                     text: 'Buscar',
                     icon: Icons.search,
-                    onClicked: () => selectedItem(context, 3),
-                  ),
-                  const SizedBox(height: 16),
-                  buildMenuItem(
-                    text: 'Eliminar',
-                    icon: Icons.delete,
                     onClicked: () => selectedItem(context, 4),
                   ),
-                  const SizedBox(height: 24),
                   Divider(color: Colors.white70),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 10),
                   buildMenuItem(
                     text: 'Productos Activos',
                     icon: Icons.check,
                     onClicked: () => selectedItem(context, 5),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 10),
                   buildMenuItem(
                     text: 'Productos Inactivos',
                     icon: Icons.crop_square_sharp,
                     onClicked: () => selectedItem(context, 6),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 10),
+                  Divider(color: Colors.white70),
+                  const SizedBox(height: 10),
                   buildMenuItem(
                     text: 'Créditos',
                     icon: Icons.person,
@@ -191,11 +198,26 @@ class NavigationDrawerWidget extends StatelessWidget {
           builder: (context) => ListViewPastel(),
         ));
         break;
-        case 3:
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => Buscar(Pastel(null, '', '', '', '', '', '',0, 0, '')),
-        ));
-        break;
+      case 3:
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => ComprarPastel(),
+      ));
+      break;
+      case 4:
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => Buscar(Pastel(null, '', '', '', '', '', '',0, 0, '')),
+      ));
+      break;
+      case 5:
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => ListViewActivos(),
+      ));
+      break;
+      case 6:
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => ListViewInactivos(),
+      ));
+      break;
       case 7:
         Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => Creditos()),

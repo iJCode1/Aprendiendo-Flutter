@@ -256,8 +256,8 @@ class _ScreenPastelState extends State<ScreenPastel>{
                             alignedDropdown: true,
                             child: DropdownButton<String>(
                               // fotoController.length < 10 ? Container() : new Image.file(new File(fotoController)),
-                              // value: statusController.length > 5 ? statusController : statusElegido,
-                              value: statusController.isEmpty ? statusElegido : statusController.toString(),
+                              value: statusController.isNotEmpty ? statusController : statusElegido,
+                              //value: statusElegido,
                               iconSize: 30,
                               //icon: (null),
                               style: TextStyle(
@@ -269,7 +269,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                               hint: Text('Seleccionar el estatus del producto'),
                               onChanged: (newValue){
                                 setState(() {
-                                  statusElegido = newValue!;
+                                  statusController = newValue!;
                                   print(statusElegido);
                                 });
                               },
@@ -453,7 +453,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                             'articulo':articuloController.text,
                             'descripcion':descripcionController.text,
                             'fecha':fechaController,
-                            'status':statusElegido,
+                            'status':statusController,
                             'precio':precioController.text,
                             'contacto':contactoController.text,
                             'latitude': latitudeController,
@@ -465,7 +465,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
                             'articulo':articuloController.text,
                             'descripcion':descripcionController.text,
                             'fecha':fechaController,
-                            'status':statusElegido,
+                            'status':statusController,
                             'precio':precioController.text,
                             'contacto':contactoController.text,
                             'latitude': latitudeController,
