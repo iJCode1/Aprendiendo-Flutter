@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_evaluacion_practica1/src/model/pastel.dart';
@@ -88,6 +87,7 @@ class _Buscar extends State<Buscar> {
                           ),
                         ),
                         Padding(padding: EdgeInsets.only(top: 8.0)),
+                        // ignore: deprecated_member_use
                         RaisedButton(
                           onPressed: () =>
                               _buscarPastel(articuloController.text),
@@ -279,6 +279,7 @@ class _Buscar extends State<Buscar> {
                         ),
                         Padding(padding: EdgeInsets.only(top: 20.0)),
                         Container(
+                          // ignore: deprecated_member_use
                           child: RaisedButton(
                             onPressed: () =>
                                 _buscarPastel(articuloController.text),

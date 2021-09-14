@@ -38,6 +38,7 @@ dependencies:
   location:
   latlong2:
   flutter_map:
+  rflutter_alert: ^2.0.4
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +57,7 @@ flutter_icons:
 flutter:
   assets:
     - assets/
+    - assets/images/
   fonts:
     - family: Lato
       fonts:

@@ -11,6 +11,7 @@ import 'package:flutter_evaluacion_practica1/src/ui/screen_pastel.dart';
 import 'dart:async';
 
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ListViewPastel extends StatefulWidget {
   ListViewPastel({Key? key}) : super(key: key);
@@ -151,10 +152,85 @@ class _ListViewPastelState extends State<ListViewPastel> {
                                               icon: Icon(Icons.delete_outlined,
                                                   color: new Color.fromRGBO(
                                                       255, 136, 130, 1)),
-                                              onPressed: () => _borrarPastel(
-                                                  context,
-                                                  items[position],
-                                                  position),
+                                              // onPressed: () => _borrarPastel(
+                                              //     context,
+                                              //     items[position],
+                                              //     position
+                                              // ),
+                                              onPressed: () => {
+                                                showDialog(
+                                                  context: context, 
+                                                  builder: (BuildContext context){
+                                                    return AlertDialog(
+                                                      title: Column(
+                                                        children: [
+                                                          Text('Confirmar Eliminación', style: TextStyle(fontFamily: "Lato", fontSize: 25, color: Colors.black),),
+                                                          Padding(padding: EdgeInsets.only(top: 10, bottom: 20)),
+                                                          Image.network('https://firebasestorage.googleapis.com/v0/b/flutter-evaluacion-practica1.appspot.com/o/imagenes%2Ficon_error.png?alt=media&token=ca100e99-53db-417f-afa2-3b3ded8073c6',
+                                                          width: 50, height: 50, fit: BoxFit.contain,),
+                                                        ],
+                                                      ), 
+                                                      content: SingleChildScrollView(
+                                                        child: ListBody(
+                                                          children: [
+                                                            Text('¿Eliminar Producto?', style: TextStyle(fontFamily: "Lato", fontWeight: FontWeight.w700, fontSize: 20, color: Colors.red[300]),),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      actions: [
+                                                        DialogButton(
+                                                          width: 300,
+                                                          child: Text(
+                                                            "Baja Física (Definitiva)",
+                                                            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700, fontFamily: 'Lato'),
+                                                          ),
+                                                          onPressed: () => {
+                                                            // Navigator.pop(context),
+                                                            _borrarPastel(
+                                                                context,
+                                                                items[position],
+                                                                position
+                                                            ),
+                                                            Navigator.of(context).pop(),
+                                                          // Navigator.of(context).pop(),
+                                                          },
+                                                          gradient: LinearGradient(colors: [
+                                                            Color.fromRGBO(255, 122, 168, 1.0),
+                                                            Color.fromRGBO(254, 51, 114, 1.0)
+                                                          ]),
+                                                        ),
+                                                        DialogButton(
+                                                          child: Text(
+                                                            "Baja Lógica (Status)",
+                                                            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w700, fontFamily: 'Lato'),
+                                                          ),
+                                                          onPressed: () => {
+                                                            // Navigator.pop(context),
+                                                          },
+                                                          gradient: LinearGradient(colors: [
+                                                            Color.fromRGBO(116, 116, 191, 1.0),
+                                                            Color.fromRGBO(52, 138, 199, 1.0)
+                                                          ]),
+                                                        ),
+                                                        DialogButton(
+                                                          child: Text(
+                                                            "Cancelar",
+                                                            style: TextStyle(color: Colors.black54, fontSize: 18, fontWeight: FontWeight.w700, fontFamily: 'Lato'),
+                                                          ),
+                                                          onPressed: (){
+                                                            
+                                                            Navigator.of(context).pop();
+                                                          },
+                                                          gradient: LinearGradient(colors: [
+                                                            Color.fromRGBO(240, 255, 122, 1.0),
+                                                            Color.fromRGBO(175, 255, 70, 1.0)
+                                                          ]),
+                                                        )
+                                                      ],
+                                                    );
+                                                  }
+                                                ),
+                                              }
                                             ),
                                             IconButton(
                                               icon: Icon(
