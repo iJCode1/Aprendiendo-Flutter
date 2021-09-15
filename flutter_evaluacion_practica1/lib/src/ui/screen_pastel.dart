@@ -108,6 +108,7 @@ class _ScreenPastelState extends State<ScreenPastel>{
 
   late File sampleImage;
 
+  // ignore: unused_element
   static bool get activar => activar;
 
 
