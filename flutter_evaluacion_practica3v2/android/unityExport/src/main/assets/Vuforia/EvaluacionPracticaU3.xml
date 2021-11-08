@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="grass" size="5.000000 2.105263" />
+    <ImageTarget name="tv" size="5.000000 3.753056" />
+    <ImageTarget name="pineapplePattern" size="5.000000 5.000000" />
+    <ImageTarget name="cieloBob" size="5.000000 2.504000" />
+    <ImageTarget name="arenaBob" size="5.000000 3.750000" />
+  </Tracking>
+</QCARConfig>
