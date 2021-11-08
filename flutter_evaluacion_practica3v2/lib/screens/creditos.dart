@@ -10,12 +10,12 @@ class Creditos extends StatelessWidget {
         appBar: AppBar(
           backwardsCompatibility: false,
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: new Color.fromRGBO(48, 71, 94, 1),
+            statusBarColor: Colors.orange,
             statusBarIconBrightness: Brightness.light,
           ),
           title: Text('Créditos'),
           centerTitle: true,
-          backgroundColor: new Color.fromRGBO(48, 71, 94, 1),
+          backgroundColor: Colors.orange,
         ),
         body: SafeArea(
             child: Container(
@@ -32,7 +32,7 @@ class Creditos extends StatelessWidget {
                   'Joel Dominguez Merino',
                   style: TextStyle(
                       fontSize: 30.0,
-                      color: new Color.fromRGBO(48, 71, 94, 1),
+                      color: Colors.orange,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Pacifico'),
                   textAlign: TextAlign.center,

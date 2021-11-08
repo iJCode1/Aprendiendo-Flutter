@@ -2,8 +2,8 @@
     package="com.example.flutter_evaluacion_practica3v2">
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
    <application
-        android:label="flutter_evaluacion_practica3v2"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Evaluación3 - BOB_RA"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

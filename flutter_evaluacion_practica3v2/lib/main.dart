@@ -10,20 +10,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     return MaterialApp(
       title: 'Evaluación 3',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
       ),
-      home: MyHomePage(title: ''),
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
 
-  final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -37,10 +38,10 @@ class _MyHomePageState extends State<MyHomePage> {
           automaticallyImplyLeading: false,
           backwardsCompatibility: false,
           systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: new Color.fromRGBO(48, 71, 94, 1),
+            statusBarColor: Colors.orange,
             statusBarIconBrightness: Brightness.light,
           ),
-          title: Text(widget.title),
+          
         ),
         body: Center(
           child: Home(),
