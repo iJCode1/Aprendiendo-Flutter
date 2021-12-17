@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "109223680966",
+    "project_id": "spootsmart",
+    "storage_bucket": "spootsmart.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109223680966:android:3aaf2c84648753365b70c7",
+        "android_client_info": {
+          "package_name": "com.example.spootsmart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109223680966-aruivog70d8op8qcth2aqphpno6gm5kr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1_oFOA5xNOC2sQRzXKMCKzg5q7MBIQho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "109223680966-aruivog70d8op8qcth2aqphpno6gm5kr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
